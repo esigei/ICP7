@@ -13,14 +13,7 @@ jobs:
     steps:
       - name: "Checkout Code"
         uses: actions/checkout@v2
-      - name: "StackHawk DAST"
-      - name: Run the Vuln Django Containers
-        run: docker-compose up -d
-      - name: Run HawkScan
-        uses: stackhawk/hawkscan-action@v1.2.1
-        with:
-          apiKey: ${{ secrets.HAWK_API_KEY }}
-          configurationFiles: secscan.yml
+        
       - name: "Run Horusec"
         run:  |
           curl -fsSL https://raw.githubusercontent.com/ZupIT/horusec/master/deployments/scripts/install.sh | bash -s latest
@@ -30,4 +23,12 @@ jobs:
         uses: fossas/fossa-action@v1
         with:
           api-key: ${{secrets.fossaApiKey}}
-
+      
+      - name: "StackHawk DAST"
+      - name: Run the Vuln Django Containers
+        run: docker-compose up -d
+      - name: Run HawkScan
+        uses: stackhawk/hawkscan-action@v1.2.1
+        with:
+          apiKey: ${{ secrets.HAWK_API_KEY }}
+          configurationFiles: secscan.yml
