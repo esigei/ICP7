@@ -27,4 +27,4 @@ jobs:
       - name: Run Hurosec
         run: |
           curl -fsSL https://raw.githubusercontent.com/ZupIT/horusec/master/deployments/scripts/install.sh | bash -s latest
-          horusec start -p
+          horusec start -p .
