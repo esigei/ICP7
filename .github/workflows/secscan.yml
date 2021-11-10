@@ -23,5 +23,8 @@ jobs:
         uses: fossas/fossa-action@v1
         with:
           api-key: ${{secrets.fossaApiKey}}
+      - uses: stackhawk/hawkscan-action@v1.3.2
+        with:
+          apiKey: ${{ secrets.HAWK_API_KEY }}
       
    
