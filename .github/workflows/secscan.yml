@@ -23,10 +23,17 @@ jobs:
         uses: fossas/fossa-action@v1
         with:
           api-key: ${{secrets.fossaApiKey}}
-      - name: Run Application
-        run:  nohup npm run start &
-      - uses: stackhawk/hawkscan-action@v1.3.2
-        with:
-          apiKey: ${{ secrets.HAWK_API_KEY }}
+     # - name: Run Application
+      #  run:  nohup npm run start &
+      #- uses: stackhawk/hawkscan-action@v1.3.2
+       # with:
+         # apiKey: ${{ secrets.HAWK_API_KEY }}
+      - name: Building the container Image
+        run:  |
+          DOCKER_BUILDKIT=1 docker build -t petclinic
+          
+      - name: Running container
+        run:  |
+          docker run --rm -p 8080:8080 --name petclinic petclinic
       
    
